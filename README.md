@@ -1,34 +1,45 @@
-# oxmysql
+# pry-pgadapter
 
-A FiveM resource to communicate with a MySQL database using [node-mysql2](https://github.com/sidorares/node-mysql2).
+**pry-pgadapter** is a FiveM resource that bridges FXServer resources with a **PostgreSQL** database. It is built on top of [node-postgres (pg)](https://node-postgres.com/) and exposes a familiar, battle-tested API surface compatible with `oxmysql`, `mysql-async`, and `ghmattimysql` — allowing you to migrate existing MySQL-based resources to PostgreSQL with minimal effort.
 
-![](https://img.shields.io/github/downloads/overextended/oxmysql/total?logo=github)
-![](https://img.shields.io/github/downloads/overextended/oxmysql/latest/total?logo=github)
-![](https://img.shields.io/github/contributors/overextended/oxmysql?logo=github)
-![](https://img.shields.io/github/v/release/overextended/oxmysql?logo=github) 
+---
 
-## 🔗 Links
-- 💾 [Download](https://github.com/overextended/oxmysql/releases/latest/download/oxmysql.zip)
-  - Download the latest release directly.
-- 📚 [Documentation](https://overextended.dev/oxmysql)
-  - For installation, setup, and everything else.
-- 📦 [npm](https://www.npmjs.com/package/@overextended/oxmysql)
-  - Use our npm package for enhanced functionality and TypeScript support.
+## Key Features
 
-## ✨ Features
+| Feature | Description |
+|---|---|
+| PostgreSQL-native | Full support for PostgreSQL via `node-postgres`. No MySQL emulation layer. |
+| Lua `PG` API | Global `PG` object with sync (`await`) and async (callback) variants for every method. |
+| PGBuilder | Fluent Lua query builder for type-safe, composable queries without raw SQL. |
+| TypeScript / JS client | First-class `pgadapter` module for TypeScript resources. |
+| Compatibility layer | Drop-in replacement for `mysql-async` and `ghmattimysql` exports. |
+| Named & positional params | Supports both `?` positional and `:name` / `@name` named placeholders. |
+| JSONB support | Native JSONB operators (`@>`, `jsonb_exists`) accessible from Lua and PGBuilder. |
+| Transactions | Simple batch transactions and advanced manual `startTransaction`. |
+| Query profiler | Slow query detection with configurable threshold and in-game UI dashboard. |
+| Type casting | Automatic conversion of PostgreSQL types to Lua/JS-native equivalents. |
 
-- Support for mysql-async and ghmattimysql syntax.
-- Promises / async query handling allowing for non-blocking and awaitable responses.
-- Improved performance and stability compared to other options.
-- Support for named and unnamed placeholders, improving performance and security.
-- Support for URI connection strings and semicolon separated values.
-- Improved parameter checking and error handling.
+---
 
-## 🧾 Logging
+## How It Works
 
-We have included a module for submitting error logs to [Fivemanage](https://fivemanage.com/?ref=overextended), a cloud management service tailored for game servers. Additional logging options and support for other services will be available in the future.
+pry-pgadapter runs as a server-side FXServer resource. It:
 
-## Lua Language Server
+1. Reads the `pg_connection_string` convar at startup.
+2. Creates a connection pool via `node-postgres`.
+3. Exposes exports (`PG.query`, `PG.insert`, etc.) consumed by other resources.
+4. Translates the MySQL-compatible API surface (`?` placeholders, callbacks) into native PostgreSQL wire protocol calls.
 
-- Install [Lua Language Server](https://marketplace.visualstudio.com/items?itemName=sumneko.lua) to ease development with annotations, type checking, diagnostics, and more.
-- See [ox_types](https://github.com/overextended/ox_types) for our Lua type definitions.
+Other resources import the shared Lua library (`@pry-pgadapter/lib/MySQL.lua`) to access the `PG` global, or the TypeScript package for JS-based resources.
+
+---
+
+## License
+
+[LGPL-3.0-or-later](https://www.gnu.org/licenses/lgpl-3.0.html)
+
+---
+
+## Help me maintaining this repo with a small donation
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F2F31SUWEP)
