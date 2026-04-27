@@ -3,6 +3,7 @@
 ## Overview
 
 * [Introduction](README.md)
+* [Benchmarks](BENCHMARKS.md)
 
 ## Getting Started
 
