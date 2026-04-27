@@ -1,0 +1,41 @@
+{
+  "name": "pry-pgadapter",
+  "version": "1.0.0",
+  "description": "FXServer to PostgreSQL adapter",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "author": "Prysma Studio",
+  "license": "LGPL-3.0-or-later",
+  "type": "module",
+  "main": "lib/PGAdapter.js",
+  "types": "lib/PGAdapter.d.ts",
+  "files": [
+    "lib/PGAdapter.js",
+    "lib/PGAdapter.d.ts"
+  ],
+  "scripts": {
+    "build": "bun build:root && lerna run build",
+    "build:root": "node build.js && cd lib && tsc",
+    "watch": "esbuild --watch --bundle --platform=node --target=node22 src/index.ts --outfile=dist/build.js",
+    "lib": "tsc --project lib/tsconfig.lib.json",
+    "bootstrap": "lerna bootstrap",
+    "postinstall": "bun bootstrap"
+  },
+  "dependencies": {
+    "pg": "^8.13.0",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "@citizenfx/server": "2.0.5132-1",
+    "@types/node": "^22.7.4",
+    "@types/pg": "^8.11.0",
+    "esbuild": "^0.21.5",
+    "lerna": "^4.0.0",
+    "postinstall-postinstall": "^2.1.0",
+    "prettier": "^3.3.3",
+    "pretty-quick": "^3.3.1",
+    "typescript": "^5.6.2"
+  }
+}
