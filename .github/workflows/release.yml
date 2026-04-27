@@ -68,12 +68,12 @@ jobs:
 
       - name: Bundle files
         run: |
-          mkdir -p ./temp/oxmysql/{web,lib}
-          cp ./{LICENSE,README.md,fxmanifest.lua,ui.lua} ./temp/oxmysql
-          cp ./lib/MySQL.lua ./temp/oxmysql/lib
-          cp -r ./dist ./logger ./temp/oxmysql
-          cp -r ./web/build ./temp/oxmysql/web/
-          cd ./temp && zip -r ../oxmysql.zip ./oxmysql
+          mkdir -p ./temp/pry-pgadapter/{web,lib}
+          cp ./{LICENSE,README.md,fxmanifest.lua,ui.lua} ./temp/pry-pgadapter
+          cp ./lib/PG.lua ./lib/PGBuilder.lua ./temp/pry-pgadapter/lib
+          cp -r ./dist ./logger ./temp/pry-pgadapter
+          cp -r ./web/build ./temp/pry-pgadapter/web/
+          cd ./temp && zip -r ../pry-pgadapter.zip ./pry-pgadapter
 
       - name: Publish package to npm registry
         run: npm publish --provenance --access public
@@ -84,7 +84,7 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
-          files: oxmysql.zip
+          files: pry-pgadapter.zip
 
       - name: Update tag
         uses: EndBug/latest-tag@v1
