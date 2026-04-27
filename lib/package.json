@@ -1,25 +1,29 @@
 {
-  "name": "@overextended/oxmysql",
-  "version": "2.14.0",
-  "description": "Exports wrapper for oxmysql",
-  "types": "MySQL.d.ts",
-  "main": "MySQL.js",
+  "name": "@prysmastudio/pgadapter",
+  "version": "1.0.0",
+  "description": "PostgreSQL adapter for FiveM and RedM",
+  "types": "PG.d.ts",
+  "main": "PG.js",
   "scripts": {
     "prepublish": "tsc"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/overextended/oxmysql.git"
+    "url": "git+https://github.com/Simomagy/pry-pgadapter.git"
   },
   "keywords": [
     "fivem",
-    "oxmysql",
-    "sql"
+    "redm",
+    "postgres",
+    "sql",
+    "database",
+    "prysma",
+    "pry"
   ],
-  "author": "Overextended",
+  "author": "Prysma Studio",
   "license": "LGPL-3.0",
   "bugs": {
-    "url": "https://github.com/overextended/oxmysql/issues"
+    "url": "https://github.com/simomagy/pry-pgadapter/issues"
   },
-  "homepage": "https://github.com/overextended/oxmysql#readme"
+  "homepage": "https://github.com/simomagy/pry-pgadapter#readme"
 }

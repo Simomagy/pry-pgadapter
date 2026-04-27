@@ -1,18 +1,18 @@
-# OxMySQL exports wrapper for FiveM
+# pry-pgadapter — TypeScript/JS client for FiveM & RedM
 
-Types are fully supported and you will get intellisense on the `oxmysql` object when using it.
+PostgreSQL adapter for FiveM and RedM resources. Full TypeScript support with intellisense on the `pgadapter` object.
 
 ## Installation
 
 ```yaml
 # With pnpm
-pnpm add @overextended/oxmysql
+pnpm add @prysmastudio/pgadapter
 
 # With Yarn
-yarn add @overextended/oxmysql
+yarn add @prysmastudio/pgadapter
 
 # With npm
-npm install @overextended/oxmysql
+npm install @prysmastudio/pgadapter
 ```
 
 ## Usage
@@ -20,29 +20,29 @@ npm install @overextended/oxmysql
 Import as module:
 
 ```js
-import { oxmysql } from '@overextended/oxmysql';
+import { pgadapter } from '@prysmastudio/pgadapter';
 ```
 
 Import with require:
 
 ```js
-const { oxmysql } = require('@overextended/oxmysql');
+const { pgadapter } = require('@prysmastudio/pgadapter');
 ```
 
 ## Documentation
 
-[View documentation](https://overextended.dev/oxmysql)
+[View documentation](https://prysma-studio.gitbook.io/pry-pgadapter/)
 
 ```js
-oxmysql.scalar('SELECT username FROM users', (result) => {
+pgadapter.scalar('SELECT username FROM users', (result) => {
     console.log(result)
 }).catch(console.error)
 
-oxmysql.scalar('SELECT username FROM users').then((result) => {
+pgadapter.scalar('SELECT username FROM users').then((result) => {
     console.log(result)
 }).catch(console.error)
 
-const result = await oxmysql.scalar('SELECT username FROM users').catch(console.error)
+const result = await pgadapter.scalar('SELECT username FROM users').catch(console.error)
 console.log(result)
 ```
 

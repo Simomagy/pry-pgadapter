@@ -19,6 +19,6 @@
     "noImplicitAny": false,
     "noEmit": false
   },
-  "include": ["MySQL.ts"],
+  "include": ["PG.ts"],
   "exclude": ["**/node_modules"]
 }

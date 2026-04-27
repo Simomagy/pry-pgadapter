@@ -23,7 +23,7 @@ interface Row {
   [column: string | number]: unknown;
 }
 
-interface OxMySQL {
+interface PryPGAdapter {
   store: (query: string) => void;
   ready: (callback: () => void) => void;
   query: <T = Result | null>(query: Query, params?: Params | Callback<T>, cb?: Callback<T>) => Promise<T>;
@@ -104,7 +104,7 @@ function execute(method: string, query: Query | Transaction, params?: Params) {
   }) as any;
 }
 
-export const pgadapter: OxMySQL = {
+export const pgadapter: PryPGAdapter = {
   store(query) {
     assert(typeof query === 'string', `Query expects a string, received ${typeof query}`);
 
