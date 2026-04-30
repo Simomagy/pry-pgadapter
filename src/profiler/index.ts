@@ -1,12 +1,12 @@
-import type { MySql } from 'database';
+import type { PG } from 'database';
 import type { CFXParameters } from 'types';
 
-export async function runProfiler(_connection: MySql, _invokingResource: string): Promise<false> {
+export async function runProfiler(_connection: PG, _invokingResource: string): Promise<false> {
   return false;
 }
 
 export async function profileBatchStatements(
-  _connection: MySql,
+  _connection: PG,
   _invokingResource: string,
   _query: string | { query: string; params?: CFXParameters }[],
   _parameters: CFXParameters | null,

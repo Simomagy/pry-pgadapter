@@ -6,10 +6,17 @@ pry-pgadapter ships a typed client module for TypeScript and JavaScript resource
 
 ## Installation
 
-The client is exported as `lib/MySQL.ts` (compiled to `lib/MySQL.js` + `lib/MySQL.d.ts`). If your resource uses the npm package:
+The client is exported as `lib/PG.ts` (compiled to `lib/PG.js` + `lib/PG.d.ts`). If your resource uses the npm package:
 
 ```bash
-# Not yet published to npm — import directly from the resource path
+# With pnpm
+pnpm add @prysmastudio/pgadapter
+
+# With Yarn
+yarn add @prysmastudio/pgadapter
+
+# With npm
+npm install @prysmastudio/pgadapter
 ```
 
 For local use, import relative to the resource or use the FXServer `GetResourcePath` pattern.
@@ -18,14 +25,13 @@ For local use, import relative to the resource or use the FXServer `GetResourceP
 
 ## Import
 
+From the downloaded package:
 ```typescript
-import { pgadapter } from '../../[core]/pry-pgadapter/lib/MySQL';
+import { pgadapter } from '../../[core]/pry-pgadapter/lib/PG';
 ```
-
-Or, if your build resolves it via alias:
-
+From the npm package:
 ```typescript
-import { pgadapter } from '@pry-pgadapter/lib';
+import { pgadapter } from '@prysmastudio/pgadapter';
 ```
 
 All methods are fully typed. TypeScript will infer parameter and return types automatically.

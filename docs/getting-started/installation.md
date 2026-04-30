@@ -77,7 +77,7 @@ If the connection fails, the console will print the error code and a hint about 
 For any resource that needs to query the database, add the shared script to its `fxmanifest.lua`:
 
 ```lua
-shared_script '@pry-pgadapter/lib/MySQL.lua'
+shared_script '@pry-pgadapter/lib/PG.lua'
 ```
 
 This makes the global `PG` object available in both server-side and client-side scripts of that resource.
@@ -88,11 +88,11 @@ To also use the **PGBuilder** fluent query builder:
 shared_script '@pry-pgadapter/lib/PGBuilder.lua'
 ```
 
-> `PGBuilder.lua` must be included **after** `MySQL.lua`, or you can include both:
+> `PGBuilder.lua` must be included **after** `PG.lua`, or you can include both:
 >
 > ```lua
 > shared_scripts {
->     '@pry-pgadapter/lib/MySQL.lua',
+>     '@pry-pgadapter/lib/PG.lua',
 >     '@pry-pgadapter/lib/PGBuilder.lua',
 > }
 > ```

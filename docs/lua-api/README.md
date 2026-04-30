@@ -5,7 +5,7 @@
 Include the shared library in your resource's `fxmanifest.lua`:
 
 ```lua
-shared_script '@pry-pgadapter/lib/MySQL.lua'
+shared_script '@pry-pgadapter/lib/PG.lua'
 ```
 
 This injects the global `PG` object into every script of your resource (both server-side and shared scripts). No explicit `require` or import is necessary.

@@ -1,9 +1,9 @@
-import { MySql, getConnection } from './connection';
+import { PG, getConnection } from './connection';
 import { logError } from '../logger';
 import { CFXCallback, CFXParameters } from '../types';
 import { parseArguments } from 'utils/parseArguments';
 
-async function runQuery(conn: MySql | null, sql: string, values: CFXParameters) {
+async function runQuery(conn: PG | null, sql: string, values: CFXParameters) {
   [sql, values] = parseArguments(sql, values);
 
   try {
@@ -21,7 +21,7 @@ export const startTransaction = async (
   cb?: CFXCallback,
   isPromise?: boolean
 ) => {
-  await using conn: MySql = await getConnection();
+  await using conn: PG = await getConnection();
   let response: boolean | null = false;
   let closed = false;
 
@@ -39,7 +39,7 @@ export const startTransaction = async (
     if (closed) throw new Error(`Transaction has timed out after 30 seconds.`);
 
     response = commit === false ? false : true;
-    
+
     if (!response) await conn.rollback();
   } catch (err: any) {
     await conn.rollback().catch(() => {});

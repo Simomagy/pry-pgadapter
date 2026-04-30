@@ -124,6 +124,6 @@ dist
 .pnp.*
 
 # Wrapper
-lib/MySQL.js
-lib/MySQL.d.ts
-lib/MySQL.js.map
+lib/PG.lua.js
+lib/PG.lua.d.ts
+lib/PG.lua.js.map

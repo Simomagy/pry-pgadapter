@@ -8,7 +8,7 @@ import type { CFXParameters } from 'types';
 (Symbol as any).asyncDispose ??= Symbol('Symbol.asyncDispose');
 
 let connectionCounter = 0;
-const activeConnections: Record<number, MySql> = {};
+const activeConnections: Record<number, PG> = {};
 
 function hashQuery(query: string): string {
   let hash = 5381;
@@ -18,7 +18,7 @@ function hashQuery(query: string): string {
   return `ps_${(hash >>> 0).toString(16)}`;
 }
 
-export class MySql {
+export class PG {
   id: number;
   connection: PoolClient;
   transaction?: boolean;
@@ -75,5 +75,5 @@ export async function getConnection(connectionId?: number) {
 
   return connectionId
     ? activeConnections[connectionId]
-    : new MySql(await pool.connect());
+    : new PG(await pool.connect());
 }

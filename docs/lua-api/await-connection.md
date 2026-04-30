@@ -100,7 +100,7 @@ exports['pry-pgadapter']:awaitConnection()
 
 ```lua
 -- fxmanifest.lua
-shared_script '@pry-pgadapter/lib/MySQL.lua'
+shared_script '@pry-pgadapter/lib/PG.lua'
 server_script 'server/main.lua'
 ```
 

@@ -6,11 +6,11 @@ PGBuilder is a **fluent Lua query builder** for pry-pgadapter. It generates safe
 
 ## Setup
 
-Include PGBuilder in your resource's `fxmanifest.lua` **after** `MySQL.lua`:
+Include PGBuilder in your resource's `fxmanifest.lua` **after** `PG.lua`:
 
 ```lua
 shared_scripts {
-    '@pry-pgadapter/lib/MySQL.lua',
+    '@pry-pgadapter/lib/PG.lua',
     '@pry-pgadapter/lib/PGBuilder.lua',
 }
 ```

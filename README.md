@@ -30,7 +30,7 @@ pry-pgadapter runs as a server-side FXServer resource. It:
 3. Exposes exports (`PG.query`, `PG.insert`, etc.) consumed by other resources.
 4. Translates the MySQL-compatible API surface (`?` placeholders, callbacks) into native PostgreSQL wire protocol calls.
 
-Other resources import the shared Lua library (`@pry-pgadapter/lib/MySQL.lua`) to access the `PG` global, or the TypeScript package for JS-based resources.
+Other resources import the shared Lua library (`@pry-pgadapter/lib/PG.lua`) to access the `PG` global, or the TypeScript package for JS-based resources.
 
 ---
 

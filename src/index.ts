@@ -6,19 +6,19 @@ import ghmatti from './compatibility/ghmattimysql';
 import mysqlAsync from './compatibility/mysql-async';
 import('./update');
 
-const MySQL = {} as Record<string, Function>;
+const PG = {} as Record<string, Function>;
 
-MySQL.isReady = () => {
+PG.isReady = () => {
   return pool ? true : false;
 };
 
-MySQL.awaitConnection = async () => {
+PG.awaitConnection = async () => {
   while (!pool) await sleep(0);
 
   return true;
 };
 
-MySQL.query = (
+PG.query = (
   query: string,
   parameters: CFXParameters,
   cb: CFXCallback,
@@ -28,7 +28,7 @@ MySQL.query = (
   rawQuery(null, invokingResource, query, parameters, cb, isPromise);
 };
 
-MySQL.single = (
+PG.single = (
   query: string,
   parameters: CFXParameters,
   cb: CFXCallback,
@@ -38,7 +38,7 @@ MySQL.single = (
   rawQuery('single', invokingResource, query, parameters, cb, isPromise);
 };
 
-MySQL.scalar = (
+PG.scalar = (
   query: string,
   parameters: CFXParameters,
   cb: CFXCallback,
@@ -48,7 +48,7 @@ MySQL.scalar = (
   rawQuery('scalar', invokingResource, query, parameters, cb, isPromise);
 };
 
-MySQL.update = (
+PG.update = (
   query: string,
   parameters: CFXParameters,
   cb: CFXCallback,
@@ -58,7 +58,7 @@ MySQL.update = (
   rawQuery('update', invokingResource, query, parameters, cb, isPromise);
 };
 
-MySQL.insert = (
+PG.insert = (
   query: string,
   parameters: CFXParameters,
   cb: CFXCallback,
@@ -68,7 +68,7 @@ MySQL.insert = (
   rawQuery('insert', invokingResource, query, parameters, cb, isPromise);
 };
 
-MySQL.transaction = (
+PG.transaction = (
   queries: TransactionQuery,
   parameters: CFXParameters,
   cb: CFXCallback,
@@ -78,15 +78,15 @@ MySQL.transaction = (
   rawTransaction(invokingResource, queries, parameters, cb, isPromise);
 };
 
-MySQL.startTransaction = (
+PG.startTransaction = (
   transactions: () => Promise<boolean>,
   invokingResource = GetInvokingResource()
 ) => {
-  console.warn(`MySQL.startTransaction is "experimental" and may receive breaking changes.`)
+  console.warn(`PG.startTransaction is "experimental" and may receive breaking changes.`)
   return startTransaction(invokingResource, transactions, undefined, true);
 };
 
-MySQL.prepare = (
+PG.prepare = (
   query: string,
   parameters: CFXParameters,
   cb: CFXCallback,
@@ -96,7 +96,7 @@ MySQL.prepare = (
   rawExecute(invokingResource, query, parameters, cb, isPromise, true);
 };
 
-MySQL.rawExecute = (
+PG.rawExecute = (
   query: string,
   parameters: CFXParameters,
   cb: CFXCallback,
@@ -106,14 +106,14 @@ MySQL.rawExecute = (
   rawExecute(invokingResource, query, parameters, cb, isPromise);
 };
 
-// provide the store export for compatibility (ghmatti/mysql-async); simply returns the query as-is
-MySQL.store = (query: string, cb: Function) => {
+// provide the store export for compatibility (ghmatti/PG-async); simply returns the query as-is
+PG.store = (query: string, cb: Function) => {
   cb(query);
 };
 
 // deprecated export names
-MySQL.execute = MySQL.query;
-MySQL.fetch = MySQL.query;
+PG.execute = PG.query;
+PG.fetch = PG.query;
 
 function provide(resourceName: string, method: string, cb: Function) {
   on(`__cfx_export_${resourceName}_${method}`, (setCb: Function) => setCb(cb));
@@ -121,8 +121,8 @@ function provide(resourceName: string, method: string, cb: Function) {
 
 const NO_ASYNC_WRAP = new Set(['isReady', 'awaitConnection', 'startTransaction', 'store']);
 
-for (const key in MySQL) {
-  const exp = MySQL[key];
+for (const key in PG) {
+  const exp = PG[key];
 
   global.exports(key, exp);
 
@@ -130,7 +130,7 @@ for (const key in MySQL) {
 
   const async_exp = (query: string, parameters: CFXParameters, invokingResource = GetInvokingResource()) => {
     return new Promise((resolve, reject) => {
-      MySQL[key](
+      PG[key](
         query,
         parameters,
         (result: unknown, err: string) => {
@@ -151,8 +151,8 @@ for (const key in MySQL) {
   let alias = (ghmatti as any)[key];
 
   if (alias) {
-    provide('ghmattimysql', alias, exp);
-    provide('ghmattimysql', `${alias}Sync`, async_exp);
+    provide('ghmattiPG', alias, exp);
+    provide('ghmattiPG', `${alias}Sync`, async_exp);
   }
 
   alias = (mysqlAsync as any)[key];
