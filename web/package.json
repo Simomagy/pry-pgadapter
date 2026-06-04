@@ -1,37 +1,27 @@
 {
-  "name": "pgadapter",
+  "name": "pry-pgadapter-ui",
+  "version": "1.0.0",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "dev": "vite",
     "start": "vite",
     "start:game": "vite build --watch",
-    "build": "vite build",
-    "preview": "vite preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json"
-  },
-  "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "^2.5.3",
-    "@tsconfig/svelte": "^3.0.0",
-    "svelte": "^3.59.2",
-    "svelte-check": "^2.10.3",
-    "tslib": "^2.7.0",
-    "typescript": "^4.9.5",
-    "vite": "^4.5.5"
+    "build:game": "vite build --watch",
+    "build": "tsc -p tsconfig.json --noEmit && vite build"
   },
   "dependencies": {
-    "@tabler/icons-svelte": "^2.47.0",
-    "@tanstack/svelte-table": "8.8.0",
-    "autoprefixer": "^10.4.20",
-    "chart.js": "^4.4.4",
-    "postcss": "^8.4.47",
-    "prettier": "^2.8.8",
-    "prettier-plugin-svelte": "^2.10.1",
-    "prettier-plugin-tailwindcss": "^0.2.8",
-    "svelte-chartjs": "^3.1.5",
-    "svelte-floating-ui": "^1.5.9",
-    "svelte-portal": "2.2.0",
-    "tailwindcss": "^3.4.13",
-    "tinro": "^0.6.12"
+    "lucide-react": "^0.469.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/react": "^18.3.23",
+    "@types/react-dom": "^18.3.7",
+    "@vitejs/plugin-react": "^4.6.0",
+    "tailwindcss": "^4.1.11",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.4"
   }
 }

@@ -4,7 +4,9 @@ function convertNamedToPositional(query: string, parameters: Record<string, any>
   const values: any[] = [];
   const nameToIndex: Record<string, number> = {};
 
-  const converted = query.replace(/[:@]([a-zA-Z_][a-zA-Z0-9_]*)/g, (_match, name) => {
+  // Negative lookbehind on ':' so PostgreSQL casts (e.g. `?::jsonb`, `::double precision`)
+  // are NOT mistaken for `:name` named parameters.
+  const converted = query.replace(/(?<!:)[:@]([a-zA-Z_][a-zA-Z0-9_]*)/g, (_match, name) => {
     if (!(name in nameToIndex)) {
       nameToIndex[name] = values.length;
       values.push(parameters[name] ?? null);
@@ -92,7 +94,7 @@ export const parseArguments = (query: string, parameters?: CFXParameters): [stri
     throw new Error(`Expected query to be a string but received ${typeof query} instead.`);
 
   if (parameters && typeof parameters === 'object' && !Array.isArray(parameters)) {
-    if (/[:@][a-zA-Z_][a-zA-Z0-9_]*/.test(query)) {
+    if (/(?<!:)[:@][a-zA-Z_][a-zA-Z0-9_]*/.test(query)) {
       return convertNamedToPositional(query, parameters);
     }
   }
